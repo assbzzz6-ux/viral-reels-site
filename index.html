@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viral Reels Creator | منشئ ريلزات فيروسية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #1a2a6c;
+            --secondary: #b21f1f;
+            --accent: #fdbb2d;
+            --light: #f8f9ff;
+            --dark: #333;
+            --success: #00b09b;
+            --warning: #ff8c00;
+            --danger: #ff416c;
+            --viral: #8a2be2;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            color: var(--dark);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            background: var(--light);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .description {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .language-switcher {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .lang-btn {
+            background: var(--light);
+            border: 2px solid var(--primary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .lang-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat {
+            background: var(--light);
+            padding: 15px 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            min-width: 180px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .main-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+        
+        .feature {
+            background: linear-gradient(135deg, var(--primary) 0%, #2a4cbd 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .url-input-container {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .url-input-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+        }
+        
+        .input-group {
+            display: flex;
+            margin: 20px 0;
+            gap: 10px;
+        }
+        
+        .url-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .url-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 15px rgba(26, 42, 108, 0.2);
+        }
+        
+        .btn {
+            background: linear-gradient(to right, var(--primary), #2a4cbd);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-success {
+            background: linear-gradient(to right, var(--success), #96c93d);
+        }
+        
+        .btn-danger {
+            background: linear-gradient(to right, var(--danger), #ff4b2b);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(to right, var(--warning), #ffcc00);
+        }
+        
+        .btn-viral {
+            background: linear-gradient(to right, var(--viral), #9370db);
+        }
+        
+        .btn-sm {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+        }
+        
+        .video-preview {
+            display: none;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .video-info {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .video-thumbnail {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            margin-bottom: 20px;
+        }
+        
+        .video-details {
+            text-align: right;
+            flex: 1;
+        }
+        
+        .video-duration {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin: 15px 0;
+            font-weight: bold;
+        }
+        
+        .video-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .reels-calculator {
+            background: #fff5e6;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            border-right: 5px solid var(--warning);
+        }
+        
+        .reels-options {
+            display: none;
+            margin: 30px 0;
+        }
+        
+        .option-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .option-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        .option-title {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .clips-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .clip-card {
+            background: var(--light);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            border: 2px solid #e6e9ff;
+            position: relative;
+        }
+        
+        .clip-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-color: #2a4cbd;
+        }
+        
+        .clip-thumbnail {
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary) 0%, #2a4cbd 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .clip-thumbnail::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .clip-thumbnail i {
+            position: relative;
+            z-index: 1;
+            font-size: 2rem;
+        }
+        
+        .clip-content {
+            padding: 15px;
+        }
+        
+        .clip-duration {
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .quality-options {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .quality-option {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            border: 2px solid #e6e9ff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .quality-option:hover {
+            border-color: #2a4cbd;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quality-option.selected {
+            border-color: var(--viral);
+            background: #f5f0ff;
+        }
+        
+        .quality-icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+            color: var(--viral);
+        }
+        
+        .social-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .social-platform {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            border: 2px solid #e6e9ff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .social-platform:hover {
+            border-color: #2a4cbd;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .social-platform.selected {
+            border-color: #2a4cbd;
+            background: #f0f5ff;
+        }
+        
+        .social-platform.selected::before {
+            content: '✓';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: var(--success);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .platform-icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .instagram { color: #E1306C; }
+        .tiktok { color: #000000; }
+        .facebook { color: #1877F2; }
+        .youtube { color: #FF0000; }
+        .twitter { color: #1DA1F2; }
+        
+        .viral-features {
+            background: linear-gradient(135deg, #8a2be2 0%, #9370db 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .viral-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .viral-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .viral-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .viral-item i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .scheduling {
+            display: none;
+            margin: 30px 0;
+        }
+        
+        .schedule-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .schedule-option {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .schedule-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .schedule-option.selected {
+            border-color: var(--primary);
+            background: #f0f5ff;
+        }
+        
+        .time-input {
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .time-input input {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .loader {
+            display: none;
+            width: 60px;
+            height: 60px;
+            margin: 20px auto;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .results {
+            display: none;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .success-message {
+            background: linear-gradient(135deg, var(--success) 0%, #96c93d 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .success-message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #eee;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), #2a4cbd);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        .platform-progress {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 15px 0;
+            padding: 10px;
+            background: var(--light);
+            border-radius: 8px;
+        }
+        
+        .platform-progress i {
+            font-size: 1.5rem;
+        }
+        
+        .platform-progress-bar {
+            flex: 1;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .platform-progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--success), #96c93d);
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: white;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transform: translateX(150%);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            border-right: 5px solid var(--success);
+        }
+        
+        .notification.error {
+            border-right: 5px solid var(--danger);
+        }
+        
+        /* RTL and LTR support */
+        [dir="rtl"] {
+            text-align: right;
+        }
+        
+        [dir="ltr"] {
+            text-align: left;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .input-group {
+                flex-direction: column;
+            }
+            
+            .social-platform, .quality-option {
+                min-width: 100%;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .video-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stat {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .language-switcher {
+                position: relative;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="language-switcher">
+                <button class="lang-btn" id="lang-btn">
+                    <i class="fas fa-globe"></i>
+                    <span class="lang-text">English</span>
+                </button>
+            </div>
+            
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-viruses"></i>
+                </div>
+                <div>
+                    <h1 data-ar="منشئ ريلزات فيروسية" data-en="Viral Reels Creator">منشئ ريلزات فيروسية</h1>
+                    <p class="description" data-ar="أدخل رابط فيديو يوتيوب لتحويله إلى ريلزات فيروسية عالية الجودة بذكاء اصطناعي" data-en="Enter a YouTube video URL to convert it into high-quality viral reels with AI">أدخل رابط فيديو يوتيوب لتحويله إلى ريلزات فيروسية عالية الجودة بذكاء اصطناعي</p>
+                </div>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label" data-ar="ريلزات يتم إنشاؤها" data-en="Reels Created">ريلزات يتم إنشاؤها</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">90</div>
+                    <div class="stat-label" data-ar="ثانية لكل ريلز" data-en="Seconds per Reel">ثانية لكل ريلز</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4K</div>
+                    <div class="stat-label" data-ar="جودة عالية" data-en="High Quality">جودة عالية</div>
+                </div>
+            </div>
+            
+            <div class="main-features">
+                <div class="feature"><i class="fas fa-link"></i> <span data-ar="استيراد من يوتيوب" data-en="YouTube Import">استيراد من يوتيوب</span></div>
+                <div class="feature"><i class="fas fa-clock"></i> <span data-ar="90 ثانية" data-en="90 Seconds">90 ثانية</span></div>
+                <div class="feature"><i class="fas fa-film"></i> <span data-ar="جودة 4K" data-en="4K Quality">جودة 4K</span></div>
+                <div class="feature"><i class="fas fa-virus"></i> <span data-ar="انتشار فيروسي" data-en="Viral Spread">انتشار فيروسي</span></div>
+                <div class="feature"><i class="fas fa-brain"></i> <span data-ar="ذكاء اصطناعي" data-en="AI Technology">ذكاء اصطناعي</span></div>
+                <div class="feature"><i class="fas fa-cloud-upload-alt"></i> <span data-ar="نشر تلقائي" data-en="Auto Post">نشر تلقائي</span></div>
+            </div>
+        </header>
+        
+        <div class="url-input-container">
+            <h2 class="option-title"><i class="fas fa-link"></i> <span data-ar="أدخل رابط فيديو اليوتيوب" data-en="Enter YouTube Video URL">أدخل رابط فيديو اليوتيوب</span></h2>
+            <p data-ar="الصق رابط فيديو يوتيوب لاستيراده وتحويله إلى ريلزات فيروسية عالية الجودة" data-en="Paste a YouTube video URL to import and convert it into high-quality viral reels">الصق رابط فيديو يوتيوب لاستيراده وتحويله إلى ريلزات فيروسية عالية الجودة</p>
+            <div class="input-group">
+                <input type="text" class="url-input" id="youtube-url" placeholder="https://www.youtube.com/watch?v=xxxx" dir="ltr">
+                <button class="btn" id="fetch-btn"><i class="fas fa-download"></i> <span data-ar="استيراد الفيديو" data-en="Import Video">استيراد الفيديو</span></button>
+            </div>
+        </div>
+        
+        <div class="video-preview" id="video-preview">
+            <div class="video-info">
+                <div class="video-details">
+                    <h3 id="video-title" data-ar="فيديو اليوتيوب - كيفية إنشاء ريلزات فيروسية" data-en="YouTube Video - How to Create Viral Reels">فيديو اليوتيوب - كيفية إنشاء ريلزات فيروسية</h3>
+                    <p class="video-duration"><i class="fas fa-clock"></i> <span data-ar="المدة" data-en="Duration">المدة</span>: 15:25</p>
+                    <p data-ar="قناة" data-en="Channel">قناة: <span data-ar="نصائح للتسويق الفيروسي" data-en="Viral Marketing Tips">نصائح للتسويق الفيروسي</span></p>
+                    <div class="video-actions">
+                        <button class="btn btn-sm"><i class="fas fa-play"></i> <span data-ar="معاينة الفيديو" data-en="Preview Video">معاينة الفيديو</span></button>
+                        <button class="btn btn-sm btn-warning"><i class="fas fa-sliders-h"></i> <span data-ar="إعدادات متقدمة" data-en="Advanced Settings">إعدادات متقدمة</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="video-thumbnail" id="video-thumbnail">
+                <!-- سيتم عرض صورة الفيديو هنا -->
+            </div>
+            
+            <div class="reels-calculator">
+                <h3><i class="fas fa-calculator"></i> <span data-ar="سأقوم بإنشاء" data-en="I will create">سأقوم بإنشاء</span> <span id="reels-count">5</span> <span data-ar="ريلز من هذا الفيديو" data-en="reels from this video">ريلز من هذا الفيديو</span></h3>
+                <p data-ar="مدة كل ريلز 90 ثانية - تم تحديد الأجزاء الأكثر تفاعلاً تلقائياً" data-en="Each reel is 90 seconds long - The most engaging parts were automatically selected">مدة كل ريلز 90 ثانية - تم تحديد الأجزاء الأكثر تفاعلاً تلقائياً</p>
+            </div>
+        </div>
+        
+        <div class="reels-options" id="reels-options">
+            <div class="option-card">
+                <h3 class="option-title"><i class="fas fa-cut"></i> <span data-ar="تقسيم الفيديو إلى ريلزات" data-en="Split Video into Reels">تقسيم الفيديو إلى ريلزات</span></h3>
+                <p data-ar="اختر الأجزاء التي تريد تحويلها إلى ريلز أو دع النظام يقوم بالتقسيم التلقائي بناءً على تحليل المحتوى" data-en="Choose the parts you want to convert to reels or let the system automatically split based on content analysis">اختر الأجزاء التي تريد تحويلها إلى ريلز أو دع النظام يقوم بالتقسيم التلقائي بناءً على تحليل المحتوى</p>
+                
+                <div class="clips-container">
+                    <div class="clip-card">
+                        <div class="clip-thumbnail"><i class="fas fa-play-circle"></i></div>
+                        <div class="clip-content">
+                            <div class="clip-duration"><i class="fas fa-clock"></i> 0:15 - 1:45</div>
+                            <p data-ar="بداية الفيديو مع مقدمة جذابة" data-en="Video start with engaging intro">بداية الفيديو مع مقدمة جذابة</p>
+                            <p data-ar="معدل التفاعل" data-en="Engagement Rate">معدل التفاعل: <strong>92%</strong></p>
+                            <button class="btn btn-sm"><i class="fas fa-edit"></i> <span data-ar="تخصيص" data-en="Customize">تخصيص</span></button>
+                        </div>
+                    </div>
+                    
+                    <div class="clip-card">
+                        <div class="clip-thumbnail"><i class="fas fa-play-circle"></i></div>
+                        <div class="clip-content">
+                            <div class="clip-duration"><i class="fas fa-clock"></i> 2:30 - 4:00</div>
+                            <p data-ar="الجزء الأكثر إثارة في الفيديو" data-en="The most exciting part of the video">الجزء الأكثر إثارة في الفيديو</p>
+                            <p data-ar="معدل التفاعل" data-en="Engagement Rate">معدل التفاعل: <strong>95%</strong></p>
+                            <button class="btn btn-sm"><i class="fas fa-edit"></i> <span data-ar="تخصيص" data-en="Customize">تخصيص</span></button>
+                        </div>
+                    </div>
+                    
+                    <div class="clip-card">
+                        <div class="clip-thumbnail"><i class="fas fa-play-circle"></i></div>
+                        <div class="clip-content">
+                            <div class="clip-duration"><i class="fas fa-clock"></i> 5:15 - 6:45</div>
+                            <p data-ar="نقطة الذروة في المحتوى" data-en="Content climax point">نقطة الذروة في المحتوى</p>
+                            <p data-ar="معدل التفاعل" data-en="Engagement Rate">معدل التفاعل: <strong>97%</strong></p>
+                            <button class="btn btn-sm"><i class="fas fa-edit"></i> <span data-ar="تخصيص" data-en="Customize">تخصيص</span></button>
+                        </div>
+                    </div>
+                    
+                    <div class="clip-card">
+                        <div class="clip-thumbnail"><i class="fas fa-play-circle"></i></div>
+                        <div class="clip-content">
+                            <div class="clip-duration"><i class="fas fa-clock"></i> 8:20 - 9:50</div>
+                            <p data-ar="نصيحة قيمة من الفيديو" data-en="Valuable tip from the video">نصيحة قيمة من الفيديو</p>
+                            <p data-ar="معدل التفاعل" data-en="Engagement Rate">معدل التفاعل: <strong>90%</strong></p>
+                            <button class="btn btn-sm"><i class="fas fa-edit"></i> <span data-ar="تخصيص" data-en="Customize">تخصيص</span></button>
+                        </div>
+                    </div>
+                    
+                    <div class="clip-card">
+                        <div class="clip-thumbnail"><i class="fas fa-play-circle"></i></div>
+                        <div class="clip-content">
+                            <div class="clip-duration"><i class="fas fa-clock"></i> 12:10 - 13:40</div>
+                            <p data-ar="خاتمة الفيديو مع دعوة للتفاعل" data-en="Video conclusion with call to action">خاتمة الفيديو مع دعوة للتفاعل</p>
+                            <p data-ar="معدل التفاعل" data-en="Engagement Rate">معدل التفاعل: <strong>88%</strong></p>
+                            <button class="btn btn-sm"><i class="fas fa-edit"></i> <span data-ar="تخصيص" data-en="Customize">تخصيص</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="option-card">
+                <h3 class="option-title"><i class="fas fa-film"></i> <span data-ar="إعدادات الجودة والفورمات" data-en="Quality & Format Settings">إعدادات الجودة والفورمات</span></h3>
+                <p data-ar="اختر جودة ودقة الريلزات للحصول على أفضل نتائج واحترافية" data-en="Choose the quality and resolution of reels for the best results and professionalism">اختر جودة ودقة الريلزات للحصول على أفضل نتائج واحترافية</p>
+                
+                <div class="quality-options">
+                    <div class="quality-option selected">
+                        <div class="quality-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        <h4 data-ar="جودة عالية (1080p)" data-en="High Quality (1080p)">جودة عالية (1080p)</h4>
+                        <p data-ar="مناسبة لمعظم المنصات" data-en="Suitable for most platforms">مناسبة لمعظم المنصات</p>
+                    </div>
+                    
+                    <div class="quality-option">
+                        <div class="quality-icon"><i class="fas fa-tachometer-alt-fast"></i></div>
+                        <h4 data-ar="جودة فائقة (2K)" data-en="Ultra Quality (2K)">جودة فائقة (2K)</h4>
+                        <p data-ar="للمحتوى الاحترافي" data-en="For professional content">للمحتوى الاحترافي</p>
+                    </div>
+                    
+                    <div class="quality-option">
+                        <div class="quality-icon"><i class="fas fa-rocket"></i></div>
+                        <h4 data-ar="جودة 4K" data-en="4K Quality">جودة 4K</h4>
+                        <p data-ar="أعلى جودة للمنصات الداعمة" data-en>أعلى جودة للمنصات الداعمة</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="viral-features">
+                <h3 class="viral-title"><i class="fas fa-virus"></i> <span data-ar="ميزات الانتشار الفيروسي" data-en="Viral Spread Features">ميزات الانتشار الفيروسي</span></h3>
+                <p data-ar="تقنيات متقدمة لزيادة فرص الانتشار الفيروسي للريلزات على المنصات" data-en="Advanced techniques to increase the chances of viral spread of reels on platforms">تقنيات متقدمة لزيادة فرص الانتشار الفيروسي للريلزات على المنصات</p>
+                
+                <div class="viral-grid">
+                    <div class="viral-item">
+                        <i class="fas fa-brain"></i>
+                        <h4 data-ar="تحليل الخوارزميات" data-en="Algorithm Analysis">تحليل الخوارزميات</h4>
+                        <p data-ar="تحليل تفضيلات خوارزميات كل منصة" data-en="Analysis of each platform's algorithm preferences">تحليل تفضيلات خوارزميات كل منصة</p>
+                    </div>
+                    
+                    <div class="viral-item">
+                        <i class="fas fa-hashtag"></i>
+                        <h4 data-arهاشتاقات ذكية" data-en="Smart Hashtags">هاشتاقات ذكية</h4>
+                        <p data-ar="هاشتاقات مثبتة لزيادة الوصول" data-en="Proven hashtags to increase reach">هاشتاقات مثبتة لزيادة الوصول</p>
+                    </div>
+                    
+                    <div class="viral-item">
+                        <i class="fas fa-clock"></i>
+                        <h4 data-ar="توقيت النشر الأمثل" data-en="Optimal Posting Time">توقيت النشر الأمثل</h4>
+                        <p data-ar="نشر المحتوى في أوقات الذروة" data-en="Posting content at peak times">نشر المحتوى في أوقات الذروة</p>
+                    </div>
+                    
+                    <div class="viral-item">
+                        <i class="fas fa-magic"></i>
+                        <h4 data-ar="نمط فيروسي مضمون" data-en="Guaranteed Viral Pattern">نمط فيروسي مضمون</h4>
+                        <p data-ar="أنماط محتوى مثبتة للانتشار" data-en="Proven content patterns for spread">أنماط محتوى مثبتة للانتشار</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="option-card">
+                <h3 class="option-title"><i class="fas fa-share-alt"></i> <span data-ar="منصات النشر" data-en="Publishing Platforms">منصات النشر</span></h3>
+                <p data-ar="اختر المنصات التي تريد النشر عليها وحدد إعدادات كل منصة" data-en="Choose the platforms you want to publish on and specify settings for each">اختر المنصات التي تريد النشر عليها وحدد إعدادات كل منصة</p>
+                
+                <div class="social-options">
+                    <div class="social-platform selected">
+                        <div class="platform-icon instagram"><i class="fab fa-instagram"></i></div>
+                        <h4>Instagram</h4>
+                        <p data-ar="ريلز وستوريز" data-en="Reels & Stories">ريلز وستوريز</p>
+                        <div class="btn btn-sm" style="margin-top: 10px;"><i class="fas fa-cog"></i> <span data-ar="إعدادات" data-en="Settings">إعدادات</span></div>
+                    </div>
+                    
+                    <div class="social-platform selected">
+                        <div class="platform-icon tiktok"><i class="fab fa-tiktok"></i></div>
+                        <h4>TikTok</h4>
+                        <p data-ar="فيديوهات قصيرة" data-en="Short Videos">فيديوهات قصيرة</p>
+                        <div class="btn btn-sm" style="margin-top: 10px;"><i class="fas fa-cog"></i> <span data-ar="إعدادات" data-en="Settings">إعدادات</span></div>
+                    </div>
+                    
+                    <div class="social-platform">
+                        <div class="platform-icon facebook"><i class="fab fa-facebook"></i></div>
+                        <h4>Facebook</h4>
+                        <p data-ar="ريلز" data-en="Reels">ريلز</p>
+                        <div class="btn btn-sm" style="margin-top: 10px;"><i class="fas fa-cog"></i> <span data-ar="إعدادات" data-en="Settings">إعدادات</span></div>
+                    </div>
+                    
+                    <div class="social-platform">
+                        <div class="platform-icon youtube"><i class="fab fa-youtube"></i></div>
+                        <h4>YouTube</h4>
+                        <p data-ar="Shorts" data-en="Shorts">Shorts</p>
+                        <div class="btn btn-sm" style="margin-top: 10px;"><i class="fas fa-cog"></i> <span data-ar="إعدادات" data-en="Settings">إعدادات</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scheduling" id="scheduling">
+            <div class="option-card">
+                <h3 class="option-title"><i class="fas fa-clock"></i> <span data-ar="جدولة النشر" data-en="Publishing Schedule">جدولة النشر</span></h3>
+                <p data-ar="اختر وقت النشر المناسب لكل منصة لتحقيق أقصى تفاعل وانتشار" data-en="Choose the right time to publish on each platform to maximize engagement and spread">اختر وقت النشر المناسب لكل منصة لتحقيق أقصى تفاعل وانتشار</p>
+                
+                <div class="schedule-options">
+                    <div class="schedule-option selected">
+                        <h4><i class="fas fa-bolt"></i> <span data-ar="النشر الفوري" data-en="Instant Publishing">النشر الفوري</span></h4>
+                        <p data-ar="نشر جميع الريلزات الآن" data-en="Publish all reels now">نشر جميع الريلزات الآن</p>
+                        <p class="stat-number">+10% <span data-ar="تفاعل" data-en="engagement">تفاعل</span></p>
+                    </div>
+                    
+                    <div class="schedule-option">
+                        <h4><i class="fas fa-calendar"></i> <span data-ar="جدولة مخصصة" data-en="Custom Schedule">جدولة مخصصة</span></h4>
+                        <p data-ar="اختر أوقات مختلفة لكل منصة" data-en="Choose different times for each platform">اختر أوقات مختلفة لكل منصة</p>
+                        <p class="stat-number">+25% <span data-ar="تفاعل" data-en="engagement">تفاعل</span></p>
+                    </div>
+                    
+                    <div class="schedule-option">
+                        <h4><i class="fas fa-hourglass-half"></i> <span data-ar="نشر على مدار أسبوع" data-en="Publish Over a Week">نشر على مدار أسبوع</span></h4>
+                        <p data-ar="توزيع الريلزات على مدار الأسبوع" data-en="Distribute reels throughout the week">توزيع الريلزات على مدار الأسبوع</p>
+                        <p class="stat-number">+35% <span data-ar="تفاعل" data-en="engagement">تفاعل</span></p>
+                    </div>
+                </div>
+                
+                <div class="time-input">
+                    <h4 data-ar="أول موعد للنشر" data-en="First publishing time">أول موعد للنشر:</h4>
+                    <input type="datetime-local" id="publish-time">
+                </div>
+                
+                <div class="time-input">
+                    <h4 data-ar="فترة التكرار" data-en="Repetition period">فترة التكرار:</h4>
+                    <select>
+                        <option data-ar="كل 6 ساعات" data-en="Every 6 hours">كل 6 ساعات</option>
+                        <option data-ar="كل 12 ساعة" data-en="Every 12 hours">كل 12 ساعة</option>
+                        <option selected data-ar="يومياً" data-en="Daily">يومياً</option>
+                        <option data-ar="كل يومين" data-en="Every 2 days">كل يومين</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn btn-success" id="process-btn" style="display: none;"><i class="fas fa-cog"></i> <span data-ar="معالجة الريلزات" data-en="Process Reels">معالجة الريلزات</span></button>
+            <button class="btn btn-warning" id="schedule-btn" style="display: none;"><i class="fas fa-clock"></i> <span data-ar="تأكيد الجدولة" data-en="Confirm Schedule">تأكيد الجدولة</span></button>
+            <button class="btn btn-viral" id="publish-btn" style="display: none;"><i class="fas fa-paper-plane"></i> <span data-ar="نشر فيروسي" data-en="Viral Publishing">نشر فيروسي</span></button>
+        </div>
+        
+        <div class="loader" id="loader"></div>
+        
+        <div class="results" id="results">
+            <div class="success-message">
+                <h2><i class="fas fa-check-circle"></i> <span data-ar="تم إنشاء الريلزات بنجاح!" data-en="Reels created successfully!">تم إنشاء الريلزات بنجاح!</span></h2>
+                <p data-ar="تم تحويل الفيديو إلى 5 ريلزات عالية الجودة وجدولة النشر على المنصات المحددة" data-en="The video has been converted into 5 high-quality reels and scheduled for publishing on the selected platforms">تم تحويل الفيديو إلى 5 ريلزات عالية الجودة وجدولة النشر على المنصات المحددة</p>
+            </div>
+            
+            <h3 data-ar="حالة النشر على المنصات" data-en="Publishing status on platforms">حالة النشر على المنصات:</h3>
+            
+            <div class="platform-progress">
+                <i class="fab fa-instagram instagram"></i>
+                <div class="platform-progress-bar">
+                    <div class="platform-progress-fill" style="width: 75%"></div>
+                </div>
+                <span>75%</span>
+            </div>
+            
+            <div class="platform-progress">
+                <i class="fab fa-tiktok tiktok"></i>
+                <div class="platform-progress-bar">
+                    <div class="platform-progress-fill" style="width: 90%"></div>
+                </div>
+                <span>90%</span>
+            </div>
+            
+            <div class="platform-progress">
+                <i class="fab fa-facebook facebook"></i>
+                <div class="platform-progress-bar">
+                    <div class="platform-progress-fill" style="width: 45%"></div>
+                </div>
+                <span>45%</span>
+            </div>
+            
+            <div class="platform-progress">
+                <i class="fab fa-youtube youtube"></i>
+                <div class="platform-progress-bar">
+                    <div class="platform-progress-fill" style="width: 30%"></div>
+                </div>
+                <span>30%</span>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn"><i class="fas fa-download"></i> <span data-ar="تحميل الريلزات" data-en="Download Reels">تحميل الريلزات</span></button>
+                <button class="btn btn-success"><i class="fas fa-eye"></i> <span data-ar="معاينة قبل النشر" data-en="Preview Before Publishing">معاينة قبل النشر</span></button>
+                <button class="btn btn-danger"><i class="fas fa-times"></i> <span data-ar="إلغاء النشر" data-en="Cancel Publishing">إلغاء النشر</span></button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="notification success" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <div data-ar="تم استيراد الفيديو بنجاح!" data-en="Video imported successfully!">تم استيراد الفيديو بنجاح!</div>
+    </div>
+    
+    <footer>
+        <p>© 2023 <span data-ar="منشئ ريلزات فيروسية" data-en="Viral Reels Creator">منشئ ريلزات فيروسية</span> - <span data-ar="جميع الحقوق محفوظة" data-en="All rights reserved">جميع الحقوق محفوظة</span></p>
+        <p data-ar="تم التطوير خصيصاً لإنشاء ريلزات فيروسية باحترافية عالية" data-en="Developed specifically for creating viral reels with high professionalism">تم التطوير خصيصاً لإنشاء ريلزات فيروسية باحترافية عالية</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fetchBtn = document.getElementById('fetch-btn');
+            const processBtn = document.getElementById('process-btn');
+            const scheduleBtn = document.getElementById('schedule-btn');
+            const publishBtn = document.getElementById('publish-btn');
+            const videoPreview = document.getElementById('video-preview');
+            const reelsOptions = document.getElementById('reels-options');
+            const scheduling = document.getElementById('scheduling');
+            const loader = document.getElementById('loader');
+            const results = document.getElementById('results');
+            const progressBar = document.getElementById('progress-bar');
+            const youtubeUrl = document.getElementById('youtube-url');
+            const videoDuration = document.getElementById('video-duration');
+            const reelsCount = document.getElementById('reels-count');
+            const scheduleOptions = document.querySelectorAll('.schedule-option');
+            const socialPlatforms = document.querySelectorAll('.social-platform');
+            const notification = document.getElementById('notification');
+            const langBtn = document.getElementById('lang-btn');
+            const langText = document.querySelector('.lang-text');
+            const qualityOptions = document.querySelectorAll('.quality-option');
+            
+            let currentLanguage = 'ar';
+            
+            // Language switching functionality
+            langBtn.addEventListener('click', function() {
+                currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+                document.body.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+                langText.textContent = currentLanguage === 'ar' ? 'English' : 'العربية';
+                
+                // Update all text elements
+                document.querySelectorAll('[data-ar], [data-en]').forEach(element => {
+                    if (currentLanguage === 'ar') {
+                        if (element.hasAttribute('data-ar')) {
+                            element.textContent = element.getAttribute('data-ar');
+                        }
+                    } else {
+                        if (element.hasAttribute('data-en')) {
+                            element.textContent = element.getAttribute('data-en');
+                        }
+                    }
+                });
+            });
+            
+            // Quality option selection
+            qualityOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    qualityOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Simulate fetching YouTube video
+            fetchBtn.addEventListener('click', function() {
+                if (!youtubeUrl.value) {
+                    showNotification(currentLanguage === 'ar' ? 'يرجى إدخال رابط فيديو يوتيوب' : 'Please enter a YouTube video URL', 'error');
+                    return;
+                }
+                
+                // Show loading
+                loader.style.display = 'block';
+                fetchBtn.disabled = true;
+                
+                // Simulate fetching data
+                setTimeout(function() {
+                    loader.style.display = 'none';
+                    videoPreview.style.display = 'block';
+                    processBtn.style.display = 'block';
+                    fetchBtn.disabled = false;
+                    
+                    // Show notification
+                    showNotification(currentLanguage === 'ar' ? 'تم استيراد الفيديو بنجاح!' : 'Video imported successfully!', 'success');
+                    
+                    // Set mock video data
+                    reelsCount.textContent = '5';
+                    
+                    // Create thumbnail
+                    const thumbnail = document.getElementById('video-thumbnail');
+                    thumbnail.style.background = 'linear-gradient(135deg, #1a2a6c 0%, #2a4cbd 100%)';
+                    thumbnail.style.display = 'flex';
+                    thumbnail.style.alignItems = 'center';
+                    thumbnail.style.justifyContent = 'center';
+                    thumbnail.style.color = 'white';
+                    thumbnail.style.fontSize = '1.5rem';
+                    thumbnail.style.fontWeight = 'bold';
+                    thumbnail.style.height = '340px';
+                    thumbnail.textContent = currentLanguage === 'ar' ? 'صورة فيديو اليوتيوب' : 'YouTube Video Thumbnail';
+                    
+                }, 2000);
+            });
+            
+            // Process reels
+            processBtn.addEventListener('click', function() {
+                loader.style.display = 'block';
+                processBtn.disabled = true;
+                
+                setTimeout(function() {
+                    loader.style.display = 'none';
+                    reelsOptions.style.display = 'block';
+                    scheduleBtn.style.display = 'block';
+                    processBtn.disabled = false;
+                    
+                    // Scroll to options
+                    reelsOptions.scrollIntoView({ behavior: 'smooth' });
+                }, 2000);
+            });
+            
+            // Schedule reels
+            scheduleBtn.addEventListener('click', function() {
+                scheduling.style.display = 'block';
+                publishBtn.style.display = 'block';
+                
+                // Scroll to scheduling
+                scheduling.scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Publish reels
+            publishBtn.addEventListener('click', function() {
+                loader.style.display = 'block';
+                publishBtn.disabled = true;
+                
+                // Simulate processing
+                let progress = 0;
+                const interval = setInterval(function() {
+                    progress += 5;
+                    progressBar.style.width = progress + '%';
+                    
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        loader.style.display = 'none';
+                        results.style.display = 'block';
+                        publishBtn.disabled = false;
+                        
+                        // Scroll to results
+                        results.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 200);
+            });
+            
+            // Schedule option selection
+            scheduleOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    scheduleOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            // Social platform selection
+            socialPlatforms.forEach(platform => {
+                platform.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                });
+            });
+            
+            // Show notification function
+            function showNotification(message, type) {
+                const notification = document.getElementById('notification');
+                notification.querySelector('div').textContent = message;
+                notification.className = 'notification ' + type;
+                notification.classList.add('show');
+                
+                setTimeout(function() {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
